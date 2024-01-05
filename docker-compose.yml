@@ -1,0 +1,28 @@
+version: "1.0"
+
+services:
+  pastebin-app:
+    container_name: pastebin
+    image: pastebin
+    ports:
+      - "8080:8080"
+    networks:
+      - pastebin-network
+
+  pastebin-db:
+    container_name: pastebin-db
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pastebin
+    ports:
+      - "5432:5432"
+    networks:
+      - pastebin-network
+
+volumes:
+  pastebin-db:
+
+networks:
+  pastebin-network:
+    driver: bridge
