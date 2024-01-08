@@ -1,7 +1,6 @@
 package com.halcyon.pastebin.config;
 
 import com.halcyon.pastebin.filter.JwtAuthFilter;
-import com.halcyon.pastebin.service.auth.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
