@@ -1,4 +1,4 @@
-package com.halcyon.pastebin;
+package com.halcyon.pastebin.exception;
 
 import jakarta.validation.ValidationException;
 import org.springframework.http.ResponseEntity;
