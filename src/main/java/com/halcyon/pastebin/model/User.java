@@ -33,9 +33,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-
     @OneToMany(mappedBy = "owner")
     @JsonBackReference
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
@@ -43,7 +40,23 @@ public class User {
 
     @OneToMany(mappedBy = "creator")
     @JsonBackReference
-    private List<Text> texts;
+    private List<Text> createdTexts;
+
+    @OneToMany(mappedBy = "creator")
+    @JsonBackReference
+    private List<Comment> comments;
+
+    @ManyToMany(mappedBy = "viewers")
+    @JsonBackReference
+    private List<Text> viewedTexts;
+
+    @OneToMany(mappedBy = "owner")
+    @JsonBackReference
+    private List<Like> likes;
+
+    @OneToMany(mappedBy = "owner")
+    @JsonBackReference
+    private List<Dislike> dislikes;
 
     @PrePersist
     private void onCreate() {

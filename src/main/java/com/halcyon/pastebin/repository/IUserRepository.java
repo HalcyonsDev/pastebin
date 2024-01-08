@@ -13,4 +13,9 @@ import java.util.Optional;
 public interface IUserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     boolean existsByEmail(String email);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User user SET user.name = ?1 WHERE user.id = ?2")
+    void updateNameById(String name, Long id);
 }

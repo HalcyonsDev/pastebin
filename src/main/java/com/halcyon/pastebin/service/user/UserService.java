@@ -28,7 +28,20 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with this email not found."));
     }
 
+    public User findCurrentUser() {
+        JwtAuthentication jwtAuth = (JwtAuthentication) SecurityContextHolder.getContext().getAuthentication();
+        return findByEmail(jwtAuth.getEmail());
+    }
+
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public User updateName(String name) {
+        User currentUser = findCurrentUser();
+        currentUser.setName(name);
+
+        userRepository.updateNameById(name, currentUser.getId());
+        return currentUser;
     }
 }
