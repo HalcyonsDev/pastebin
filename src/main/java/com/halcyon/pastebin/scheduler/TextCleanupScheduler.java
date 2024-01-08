@@ -12,7 +12,7 @@ import java.time.Instant;
 public class TextCleanupScheduler {
     private final ITextRepository textRepository;
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 30000)
     public void cleanupExpiredTexts() {
         Instant currentTime = Instant.now();
         textRepository.deleteByExpirationTime(currentTime);

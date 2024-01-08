@@ -27,9 +27,9 @@ public class TextController {
         return ResponseEntity.ok(text);
     }
 
-    @GetMapping("/{textId}")
-    public ResponseEntity<Text> getById(@PathVariable Long textId) {
-        Text text = textService.findById(textId);
+    @GetMapping("/{hash}")
+    public ResponseEntity<Text> getByHash(@PathVariable String hash) {
+        Text text = textService.findByHash(hash);
         return ResponseEntity.ok(text);
     }
 }

@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.Optional;
 
 @Repository
 public interface ITextRepository extends JpaRepository<Text, Long> {
+    Optional<Text> findByHash(String hash);
+
     @Transactional
     @Modifying
     @Query("DELETE FROM Text text WHERE text.expirationTime <= :currentTime")

@@ -6,6 +6,7 @@ import com.halcyon.pastebin.model.User;
 import com.halcyon.pastebin.repository.ITextRepository;
 import com.halcyon.pastebin.service.auth.AuthService;
 import com.halcyon.pastebin.service.user.UserService;
+import com.halcyon.pastebin.util.HashGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,35 @@ public class TextService {
 
     public Text create(NewTextDto dto) {
         User creator = userService.findByEmail(authService.getAuthInfo().getEmail());
-        Text text = new Text(dto.getValue(), dto.getExpirationTime(), creator);
+        Text text = Text.builder()
+                .content(dto.getContent())
+                .expirationTime(dto.getExpirationTime())
+                .creator(creator)
+                .viewCount(0L)
+                .build();
 
-        return textRepository.save(text);
+        Text savedText = textRepository.save(text);
+        savedText.setHash(HashGenerator.generateShortURL(savedText.getId()));
+
+        return textRepository.save(savedText);
     }
 
     public Text findById(Long id) {
         return textRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Text with this id not found."));
+    }
+
+    public Text findByHash(String hash) {
+        User viewer = userService.findByEmail(authService.getAuthInfo().getEmail());
+        Text text =  textRepository.findByHash(hash)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Text with this hash not found."));
+
+        if (text.getViewers().contains(viewer)) {
+            return text;
+        } else {
+            text.setViewCount(text.getViewCount() + 1);
+            text.getViewers().add(viewer);
+            return textRepository.save(text);
+        }
     }
 }
