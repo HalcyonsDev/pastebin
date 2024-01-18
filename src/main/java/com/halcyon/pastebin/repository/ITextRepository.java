@@ -18,5 +18,5 @@ public interface ITextRepository extends JpaRepository<Text, Long> {
     @Transactional
     @Modifying
     @Query("DELETE FROM Text text WHERE text.expirationTime <= :currentTime")
-    void deleteByExpirationTime(@Param("currentTime") Instant currentTime);
+    Text deleteByExpirationTime(@Param("currentTime") Instant currentTime);
 }
