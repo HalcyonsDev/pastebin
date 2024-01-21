@@ -1,4 +1,4 @@
-<h1 align="center">Keepfit
+<h1 align="center">Pastebin
 
 [![](https://img.shields.io/badge/Developed%20by-halcyon-blue)](https://github.com/HalcyonsDev)
 ![](https://img.shields.io/badge/JDK-17-yellow)
