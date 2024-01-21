@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/badge/Developed%20by-halcyon-blue)](https://github.com/HalcyonsDev)
 ![](https://img.shields.io/badge/JDK-17-yellow)
-![](https://img.shields.io/badge/Spring%20Boot-3.1.6-%236DB33F)
+![](https://img.shields.io/badge/Spring%20Boot-3.2.1-%236DB33F)
 [![](https://img.shields.io/badge/DBMS-PostgreSQL-%234476ff)](https://www.postgresql.org/)
 </h1>
 
